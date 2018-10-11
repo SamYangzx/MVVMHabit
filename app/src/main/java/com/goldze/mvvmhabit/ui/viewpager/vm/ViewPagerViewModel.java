@@ -1,7 +1,6 @@
 package com.goldze.mvvmhabit.ui.viewpager.vm;
 
 import android.app.Application;
-import android.content.Context;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.support.annotation.NonNull;
@@ -28,6 +27,7 @@ public class ViewPagerViewModel extends BaseViewModel {
     }
 
     public void addPage() {
+        items.clear();
         //模拟3个ViewPager页面
         for (int i = 1; i <= 3; i++) {
             ViewPagerItemViewModel itemViewModel = new ViewPagerItemViewModel(this, "第" + i + "个页面");

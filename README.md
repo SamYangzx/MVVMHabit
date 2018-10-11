@@ -21,7 +21,7 @@
 - 升级第三方依赖库；
 - 微调例子程序。
 
-**注：1.x（最后版本1.2.6.1）、2.x（最后版本2.0.10）已停止维护，建议使用v3.x。**
+**注：[1.x-废弃版（最后版本1.2.6.1）](https://github.com/goldze/MVVMHabit/tree/1.2.6.1)、[2.x-顺手版（最后版本2.0.10）](https://github.com/goldze/MVVMHabit/tree/2.0.10)已停止维护，建议使用当前[v3.x-健壮版](https://github.com/goldze/MVVMHabit)。**
 
 > **原文地址：** [https://github.com/goldze/MVVMHabit](https://github.com/goldze/MVVMHabit)
 
@@ -563,7 +563,7 @@ public static final String TOKEN_LOGINVIEWMODEL_REFRESH = "token_loginviewmodel_
 //参数1：接受人（上下文）
 //参数2：定义的token
 //参数3：执行的回调监听
-Messenger.getDefault().register(context, LoginViewModel.TOKEN_LOGINVIEWMODEL_REFRESH, new BindingAction() {
+Messenger.getDefault().register(this, LoginViewModel.TOKEN_LOGINVIEWMODEL_REFRESH, new BindingAction() {
     @Override
     public void call() {
 	
@@ -575,7 +575,7 @@ Messenger.getDefault().register(context, LoginViewModel.TOKEN_LOGINVIEWMODEL_REF
 //参数2：定义的token
 //参数3：实体的泛型约束
 //参数4：执行的回调监听
-Messenger.getDefault().register(context, LoginViewModel.TOKEN_LOGINVIEWMODEL_REFRESH, String.class, new Consumer<String>() {
+Messenger.getDefault().register(this, LoginViewModel.TOKEN_LOGINVIEWMODEL_REFRESH, String.class, new Consumer<String>() {
     @Override
     public void accept(String s) throws Exception {
                 
@@ -598,7 +598,7 @@ Messenger.getDefault().send("refresh",LoginViewModel.TOKEN_LOGINVIEWMODEL_REFRES
 > 为了避免大量使用Messenger，建议只在ViewModel与ViewModel之间使用，View与ViewModel之间采用ObservableField去监听UI上的逻辑，可在继承了Base的Activity或Fragment中重写initViewObservable()方法来初始化UI的监听
 
 
-注册了监听，当然也要解除它。在BaseActivity、BaseFragment的onDestroy()方法里已经调用`Messenger.getDefault().unregister(this);`解除注册，所以不用担心忘记解除导致的逻辑错误和内存泄漏。
+注册了监听，当然也要解除它。在BaseActivity、BaseFragment的onDestroy()方法里已经调用`Messenger.getDefault().unregister(viewModel);`解除注册，所以不用担心忘记解除导致的逻辑错误和内存泄漏。
 ### 3.2、文件下载
 文件下载几乎是每个app必备的功能，图文的下载，软件的升级等都要用到，mvvmhabit使用Retrofit+Okhttp+RxJava+RxBus实现一行代码监听带进度的文件下载。
 

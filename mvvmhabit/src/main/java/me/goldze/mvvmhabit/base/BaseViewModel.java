@@ -6,41 +6,20 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
-import android.content.Intent;
-import android.databinding.BaseObservable;
-import android.databinding.ObservableBoolean;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-
-import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import me.goldze.mvvmhabit.binding.viewadapter.viewgroup.IBindingItemViewModel;
-import me.goldze.mvvmhabit.utils.KLog;
-import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
 
 /**
  * Created by goldze on 2017/6/15.
  */
 public class BaseViewModel extends AndroidViewModel implements IBaseViewModel {
+    public UIChangeLiveData uc = new UIChangeLiveData();
 
     public BaseViewModel(@NonNull Application application) {
         super(application);
-    }
-
-    public UIChangeLiveData uc = new UIChangeLiveData();
-
-    public class UIChangeLiveData extends LiveData {
-        public MutableLiveData<String> showDialogLiveData = new MutableLiveData();
-        public MutableLiveData<Boolean> dismissDialogLiveData = new MutableLiveData();
-        public MutableLiveData<Map<String, Object>> startActivityLiveData = new MutableLiveData();
-        public MutableLiveData<Map<String, Object>> startContainerActivityLiveData = new MutableLiveData();
-        public MutableLiveData<Boolean> finishLiveData = new MutableLiveData();
-        public MutableLiveData<Boolean> onBackPressedLiveData = new MutableLiveData();
     }
 
     public void showDialog() {
@@ -151,6 +130,15 @@ public class BaseViewModel extends AndroidViewModel implements IBaseViewModel {
 
     @Override
     public void removeRxBus() {
+    }
+
+    public class UIChangeLiveData extends LiveData {
+        public MutableLiveData<String> showDialogLiveData = new MutableLiveData();
+        public MutableLiveData<Boolean> dismissDialogLiveData = new MutableLiveData();
+        public MutableLiveData<Map<String, Object>> startActivityLiveData = new MutableLiveData();
+        public MutableLiveData<Map<String, Object>> startContainerActivityLiveData = new MutableLiveData();
+        public MutableLiveData<Boolean> finishLiveData = new MutableLiveData();
+        public MutableLiveData<Boolean> onBackPressedLiveData = new MutableLiveData();
     }
 
     public static class ParameterField {
